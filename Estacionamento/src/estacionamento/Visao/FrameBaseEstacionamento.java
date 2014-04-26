@@ -6,17 +6,22 @@
 
 package estacionamento.Visao;
 
+import estacionamento.Controle.ControladorEstacionamento;
+import java.util.Arrays;
+
 /**
  *
  * @author aluno
  */
 public class FrameBaseEstacionamento extends javax.swing.JFrame {
-
+    private final ControladorEstacionamento controladorEstacionamento;
+    
     /**
      * Creates new form FrameBase
      */
     public FrameBaseEstacionamento() {
         initComponents();
+        controladorEstacionamento = new ControladorEstacionamento();
     }
 
     /**
@@ -28,6 +33,9 @@ public class FrameBaseEstacionamento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jTabbedPanePrincipal = new javax.swing.JTabbedPane();
         jPanelMovimento = new javax.swing.JPanel();
         jButtonConfirmar = new javax.swing.JButton();
@@ -39,15 +47,27 @@ public class FrameBaseEstacionamento extends javax.swing.JFrame {
         jLabelValorVaga = new javax.swing.JLabel();
         jTextFieldVagasDisponiveis = new javax.swing.JTextField();
         jLabelVagasDisponiveis = new javax.swing.JLabel();
+        jButtonConfirmarVagas = new javax.swing.JButton();
         jSeparatorTopo = new javax.swing.JSeparator();
         jLabelVagasLivres = new javax.swing.JLabel();
         jLabelVagasOcupadas = new javax.swing.JLabel();
         jLabelVagasLivresTotal = new javax.swing.JLabel();
         jLabelVagasOcupadasTotal = new javax.swing.JLabel();
 
+        jButton1.setText("jButton1");
+
+        jButton2.setText("jButton2");
+
+        jButton3.setText("jButton3");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonConfirmarMouseClicked(evt);
+            }
+        });
 
         jLabelPlaca.setText("Placa");
 
@@ -105,6 +125,13 @@ public class FrameBaseEstacionamento extends javax.swing.JFrame {
 
         jLabelVagasDisponiveis.setText("Vagas disponíveis");
 
+        jButtonConfirmarVagas.setText("Confirmar");
+        jButtonConfirmarVagas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonConfirmarVagasMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelConfiguracaoLayout = new javax.swing.GroupLayout(jPanelConfiguracao);
         jPanelConfiguracao.setLayout(jPanelConfiguracaoLayout);
         jPanelConfiguracaoLayout.setHorizontalGroup(
@@ -117,8 +144,9 @@ public class FrameBaseEstacionamento extends javax.swing.JFrame {
                         .addComponent(jTextFieldValorVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelConfiguracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabelVagasDisponiveis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldVagasDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(248, Short.MAX_VALUE))
+                        .addComponent(jTextFieldVagasDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonConfirmarVagas, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(254, Short.MAX_VALUE))
         );
         jPanelConfiguracaoLayout.setVerticalGroup(
             jPanelConfiguracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +159,9 @@ public class FrameBaseEstacionamento extends javax.swing.JFrame {
                 .addComponent(jLabelVagasDisponiveis)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldVagasDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonConfirmarVagas)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         jTabbedPanePrincipal.addTab("Configuração", jPanelConfiguracao);
@@ -194,6 +224,30 @@ public class FrameBaseEstacionamento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldVagasDisponiveisActionPerformed
 
+    private void jButtonConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarMouseClicked
+        try{
+            System.out.println(controladorEstacionamento.alocarVeiculo(jTextFieldPlaca.getText()));
+        }catch(Error err){
+            System.out.println("Erro:  " + err.getMessage());
+        }catch(Exception ex){
+            System.out.println("Exceção:  " + ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_jButtonConfirmarMouseClicked
+
+    private void jButtonConfirmarVagasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarVagasMouseClicked
+        try{
+            System.out.println(controladorEstacionamento.configurarVagas(jTextFieldVagasDisponiveis.getText(), jTextFieldValorVaga.getText()));
+        }catch(Error err){
+            System.out.println("Erro:  " + err.getMessage() );
+            System.out.println("Stack:  " + Arrays.toString(err.getStackTrace()));
+
+        }catch(Exception ex){
+            System.out.println("Exceção:  " + ex.getMessage());
+            System.out.println("Stack:  " + Arrays.toString(ex.getStackTrace()));
+        }
+    }//GEN-LAST:event_jButtonConfirmarVagasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -210,13 +264,7 @@ public class FrameBaseEstacionamento extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameBaseEstacionamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameBaseEstacionamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameBaseEstacionamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrameBaseEstacionamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -230,7 +278,11 @@ public class FrameBaseEstacionamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonConfirmarVagas;
     private javax.swing.JLabel jLabelEntradaSaida;
     private javax.swing.JLabel jLabelPlaca;
     private javax.swing.JLabel jLabelVagasDisponiveis;

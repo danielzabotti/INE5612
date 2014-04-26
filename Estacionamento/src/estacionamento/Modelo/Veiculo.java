@@ -10,11 +10,11 @@ package estacionamento.Modelo;
  *
  * @author aluno
  */
-public class Carro {
+public class Veiculo{
     private Placa placa;
     
-    public Carro(String placa){
-        this.placa = new Placa(placa);
+    public Veiculo(Placa placa) {
+        this.placa = placa;
     }
     
 }

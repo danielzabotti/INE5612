@@ -6,19 +6,24 @@
 
 package estacionamento.Modelo;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author aluno
  */
 public class Vaga {
     private Boolean ocupada;
-    
+    private BigDecimal valor;
+    private Veiculo veiculoOcupante;
     /**
      *
      * @param valor
      */
-    public Vaga(Float valor){
+    public Vaga(BigDecimal valor){
         this.valor = valor;
+        this.ocupada = false;
+ 
     }
 
     public Boolean isOcupada() {
@@ -29,12 +34,20 @@ public class Vaga {
         this.ocupada = ocupada;
     }
 
-    public Float getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(Float valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
-    private Float valor;    
+    
+    public Veiculo getVeiculo() {
+        return veiculoOcupante;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculoOcupante = veiculo;
+    }
+        
 }

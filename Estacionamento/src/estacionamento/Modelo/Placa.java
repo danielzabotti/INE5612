@@ -14,20 +14,16 @@ public class Placa {
     private String placa;    
 
     public Placa(String placa) {
-        if(validarPlaca(placa)){
+        if(validarPlaca(placa))
             this.placa = placa;
-        }else{
-            throw new IllegalArgumentException("Placa inválida");
-        }
+        
     }
 
-    private boolean validarPlaca(String placa) {
-        Boolean valida = true;
-
-        if(!placa.matches("[A-Z]{3}[0-9]{4}")){            
-            valida = false;
-        }        
-        return valida;
+    public static boolean validarPlaca(String placa) {
+        if(!placa.matches("[A-Z]{3}[0-9]{4}"))        
+            throw new IllegalArgumentException("Placa inválida");
+               
+        return true;
     }
     
     public String getPlaca() {
@@ -35,11 +31,8 @@ public class Placa {
     }
 
     public void setPlaca(String placa) {
-        if(validarPlaca(placa)){
+        if(validarPlaca(placa))
             this.placa = placa;
-        }else{
-            throw new IllegalArgumentException("Placa inválida");
-        }     
     }            
     
 }
