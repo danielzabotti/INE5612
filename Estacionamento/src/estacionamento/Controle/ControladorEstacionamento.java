@@ -8,7 +8,9 @@ package estacionamento.Controle;
 import estacionamento.Modelo.Estacionamento;
 import estacionamento.Modelo.Placa;
 import estacionamento.Modelo.Veiculo;
+import estacionamento.Visao.FrameBaseEstacionamento;
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 /**
  *
@@ -17,22 +19,29 @@ import java.math.BigDecimal;
 public class ControladorEstacionamento {
 
     private final Estacionamento estacionamento;
+    private FrameBaseEstacionamento visao;
 
     public ControladorEstacionamento() {
         estacionamento = new Estacionamento();
     }
 
-    public String alocarVeiculo(String placa) {
+    public String entradaSaidaVeiculo(String placa) {
         String retorno = "";
+        Placa tmpPlaca = new Placa(placa);
         
-            Placa tmpPlaca = new Placa(placa);
+        
+        if(!estacionamento.veiculoEstacionado(tmpPlaca)){
+            
             if(estacionamento.alocarVeiculo(new Veiculo(tmpPlaca))){
                 retorno = "Veículo alocado.";
             }else{
                 throw new Error("Estacionamento lotado!");
             }
-        
-        
+        }else{
+            Veiculo veiculo = estacionamento.buscarVeiculo(tmpPlaca);
+            retorno = estacionamento.registrarSaida(veiculo).toPlainString();
+        }
+        atualizarView();
         return retorno;
     }
 
@@ -44,9 +53,21 @@ public class ControladorEstacionamento {
         if(estacionamento.configurarVagas(numeroVagas, valorVagas)){
             retorno = "Vagas configuradas.";
         }else{
-            throw new Error("");
+            throw new Error("merdaxiti");
         }
+        atualizarView();
         return retorno;
+    }
+
+    public void registrarView(FrameBaseEstacionamento visao) {
+        this.visao = visao;
+        this.visao.setVisible(true);
+        atualizarView();
+    }
+
+    private void atualizarView() {
+        this.visao.mudarTextoVagasOcupadas(String.valueOf(estacionamento.vagasOcupadas().size()));
+        this.visao.mudarTextoVagasLivres(String.valueOf(estacionamento.vagasLivres().size()));    
     }
 
 }

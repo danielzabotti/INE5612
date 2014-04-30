@@ -26,13 +26,18 @@ public class Placa {
         return true;
     }
     
-    public String getPlaca() {
+    @Override
+    public String toString() {
         return placa;
     }
 
     public void setPlaca(String placa) {
         if(validarPlaca(placa))
             this.placa = placa;
-    }            
+    }       
+    
+    public Boolean equals(Placa placa){
+        return this.placa.equals(placa.toString());
+    }
     
 }

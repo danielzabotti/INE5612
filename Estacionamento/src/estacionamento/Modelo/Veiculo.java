@@ -16,5 +16,9 @@ public class Veiculo{
     public Veiculo(Placa placa) {
         this.placa = placa;
     }
+
+    public Placa getPlaca() {
+        return this.placa;
+    }
     
 }

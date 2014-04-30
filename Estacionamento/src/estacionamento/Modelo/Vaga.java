@@ -23,6 +23,7 @@ public class Vaga {
     public Vaga(BigDecimal valor){
         this.valor = valor;
         this.ocupada = false;
+        this.veiculoOcupante = null;
  
     }
 
