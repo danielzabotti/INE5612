@@ -10,7 +10,6 @@ import estacionamento.Modelo.Placa;
 import estacionamento.Modelo.Veiculo;
 import estacionamento.Visao.FrameBaseEstacionamento;
 import java.math.BigDecimal;
-import java.util.Arrays;
 
 /**
  *
@@ -25,38 +24,35 @@ public class ControladorEstacionamento {
         estacionamento = new Estacionamento();
     }
 
-    public String entradaSaidaVeiculo(String placa) {
-        String retorno = "";
+    public void entradaSaidaVeiculo(String placa) {
+
         Placa tmpPlaca = new Placa(placa);
         
         
         if(!estacionamento.veiculoEstacionado(tmpPlaca)){
             
-            if(estacionamento.alocarVeiculo(new Veiculo(tmpPlaca))){
-                retorno = "Veículo alocado.";
-            }else{
-                throw new Error("Estacionamento lotado!");
-            }
+            if(!estacionamento.alocarVeiculo(new Veiculo(tmpPlaca)))
+                throw new Error("Não há vagas disponíveis!");
+            
         }else{
             Veiculo veiculo = estacionamento.buscarVeiculo(tmpPlaca);
-            retorno = estacionamento.registrarSaida(veiculo).toPlainString();
+            
+            String total = estacionamento.valorSaida(veiculo).toString();
+            if(visao.dialogoSimNao("Total: " + total, "Confirmar saída")){
+                estacionamento.registrarSaida(veiculo).toPlainString();
+            } 
+               
         }
         atualizarView();
-        return retorno;
     }
 
-    public String configurarVagas(String numeroVagasString, String valorVagasString) {
-        String retorno = "";
+    public void configurarVagas(String numeroVagasString, String valorVagasString) {
         Integer numeroVagas = Integer.parseInt(numeroVagasString);
         BigDecimal valorVagas = new BigDecimal(valorVagasString);
         
-        if(estacionamento.configurarVagas(numeroVagas, valorVagas)){
-            retorno = "Vagas configuradas.";
-        }else{
-            throw new Error("merdaxiti");
-        }
+        if(!estacionamento.configurarVagas(numeroVagas, valorVagas))
+            throw new Error("");
         atualizarView();
-        return retorno;
     }
 
     public void registrarView(FrameBaseEstacionamento visao) {

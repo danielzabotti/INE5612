@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package estacionamento.Visao;
 
 import estacionamento.Controle.ControladorEstacionamento;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author aluno
  */
 public class FrameBaseEstacionamento extends javax.swing.JFrame {
+
     private final ControladorEstacionamento controladorEstacionamento;
-    
+
     /**
      * Creates new form FrameBase
      */
@@ -225,35 +226,45 @@ public class FrameBaseEstacionamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldVagasDisponiveisActionPerformed
 
     private void jButtonConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarMouseClicked
-        try{
-            System.out.println(controladorEstacionamento.entradaSaidaVeiculo(jTextFieldPlaca.getText()));
-        }catch(Error err){
+        try {
+          controladorEstacionamento.entradaSaidaVeiculo(jTextFieldPlaca.getText());
+        } catch (Error err) {
             System.out.println("Erro:  " + err.getMessage());
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("Exceção:  " + ex.getMessage());
         }
-        
+
     }//GEN-LAST:event_jButtonConfirmarMouseClicked
 
     private void jButtonConfirmarVagasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarVagasMouseClicked
-        try{
-            System.out.println(controladorEstacionamento.configurarVagas(jTextFieldVagasDisponiveis.getText(), jTextFieldValorVaga.getText()));
-        }catch(Error err){
-            System.out.println("Erro:  " + err.getMessage() );
+        try {
+            controladorEstacionamento.configurarVagas(jTextFieldVagasDisponiveis.getText(), jTextFieldValorVaga.getText());
+        } catch (Error err) {
+            System.out.println("Erro:  " + err.getMessage());
             System.out.println("Stack:  " + Arrays.toString(err.getStackTrace()));
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("Exceção:  " + ex.getMessage());
             System.out.println("Stack:  " + Arrays.toString(ex.getStackTrace()));
         }
     }//GEN-LAST:event_jButtonConfirmarVagasMouseClicked
 
-    public void mudarTextoVagasOcupadas(String qnt){
+    public void mudarTextoVagasOcupadas(String qnt) {
         this.jLabelVagasOcupadasTotal.setText(qnt);
     }
-    
-    public void mudarTextoVagasLivres(String qnt){
+
+    public void mudarTextoVagasLivres(String qnt) {
         this.jLabelVagasLivresTotal.setText(qnt);
+    }
+    
+    public Boolean dialogoSimNao(String textoCorpo, String textoBarra){
+        Boolean retorno = false;
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, textoCorpo, textoBarra, dialogButton);
+        if (dialogResult == 0) {
+            retorno = true;
+        }
+        return retorno;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

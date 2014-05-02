@@ -20,9 +20,7 @@ public class Estacionamento {
     private HashSet<Vaga> vagas;
     
     public Estacionamento(){
-        vagas = new HashSet<>();
-        vagas.add(new Vaga(new BigDecimal(0.00)));
-        vagas.add(new Vaga(new BigDecimal(0.00)));
+        vagas = new HashSet<>();        
     }
     
     public Boolean alocarVeiculo(Veiculo veiculo) {
@@ -82,6 +80,14 @@ public class Estacionamento {
         return retorno;
     }
 
+    public BigDecimal valorSaida(Veiculo veiculo) {
+        BigDecimal retorno = new BigDecimal("0.00");
+        for(Vaga ivaga : this.vagasOcupadas())
+            if(ivaga.getVeiculo().equals(veiculo))
+                retorno = ivaga.getValor();       
+        return retorno;
+    }
+    
     public BigDecimal registrarSaida(Veiculo veiculo) {
         Vaga vaga = null;
         for(Vaga ivaga : this.vagasOcupadas())
