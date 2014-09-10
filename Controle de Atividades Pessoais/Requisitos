@@ -1,0 +1,6 @@
+As seguintes funcionalidades devem ser acessíveis a partir da interface gráfica da aplicação:
+
+Adicionar e Remover uma atividade: uma atividade deve possuir nome, descrição, categoria, progresso de execução, data e hora de início e de encerramento.
+Adicionar, Remover, e Editar uma categoria: uma categoria possui nome e descrição. Uma categoria pode estar associada a várias atividades.
+Listar todas as atividades do dia corrente.
+Buscar atividades (dado um texto, procurar por atividades que contenham esse texto no nome e categorias com esse texto no nome que possuem atividades associadas)
