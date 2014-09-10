@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package beans;
 
 import java.io.Serializable;
@@ -13,13 +12,33 @@ import java.util.Date;
  *
  * @author daniel
  */
-public class AtividadeBean implements Serializable{
+public class AtividadeBean implements Serializable {
+
     private String nome;
     private String descricao;
     private CategoriaBean categoria;
     private Integer progresso;
     private Date inicio;
     private Date fim;
+
+    public AtividadeBean(AtividadeBean atividade) {
+        this.nome = atividade.nome;
+        this.descricao = atividade.descricao;
+        this.categoria = atividade.categoria;
+        this.progresso = atividade.progresso;
+        this.inicio = atividade.inicio;
+        this.fim = atividade.fim;
+    }
+
+    public AtividadeBean(String nome, String descricao, CategoriaBean categoria,
+            Integer progresso, Date inicio, Date fim) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.categoria = categoria;
+        this.progresso = progresso;
+        this.inicio = inicio;
+        this.fim = fim;
+    }
 
     public String getNome() {
         return nome;
@@ -68,7 +87,5 @@ public class AtividadeBean implements Serializable{
     public void setFim(Date fim) {
         this.fim = fim;
     }
-    
-    
-    
+
 }

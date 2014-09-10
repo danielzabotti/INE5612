@@ -10,12 +10,12 @@ package visao.paineis;
  *
  * @author daniel
  */
-public class PainelEditarCategorias extends javax.swing.JPanel {
+public class PainelAdicionarEditarCategorias extends javax.swing.JPanel {
 
     /**
      * Creates new form PainelEditarCategorias
      */
-    public PainelEditarCategorias() {
+    public PainelAdicionarEditarCategorias() {
         initComponents();
     }
 

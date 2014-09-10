@@ -6,12 +6,31 @@
 
 package modelo;
 
-import java.io.Serializable;
+import beans.CategoriaBean;
+import java.util.HashMap;
 
 /**
  *
  * @author daniel
  */
-public class ListaDeCategoria implements Serializable{
+public class ListaDeCategoria {
+    private HashMap<String, CategoriaBean> listaDeCategoria = new HashMap<>();
     
+    public CategoriaBean buscaCategoria(String nomeBusca){
+        return listaDeCategoria.get(nomeBusca);
+    }
+    
+    public void adicionarCategoria(CategoriaBean categoria){
+        listaDeCategoria.put(categoria.getNome(), categoria);
+    }
+    
+    public void removerCategoria(CategoriaBean categoria){
+        listaDeCategoria.remove(categoria.getNome());
+    }
+    
+    public void editaCategoria(String descricao, CategoriaBean categoria){
+        CategoriaBean modificada = new CategoriaBean(categoria);
+        modificada.setDescricao(descricao);
+        listaDeCategoria.replace(categoria.getNome(), categoria, modificada);
+    }
 }

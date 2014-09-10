@@ -4,7 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/daniel/Documents/gitHub/INE5612/Controle%20de%20Atividades%20Pessoais/Requisitos</file>
-            <file>file:/Users/daniel/Documents/gitHub/INE5612/Controle%20de%20Atividades%20Pessoais/src/ine5612lab1/INE5612Lab1.java</file>
+            <file>file:/Users/daniel/Documents/gitHub/INE5612/Controle%20de%20Atividades%20Pessoais/src/ine5612Lab1/modelo/ListaDeCategoria.java</file>
+            <file>file:/Users/daniel/Documents/gitHub/INE5612/Controle%20de%20Atividades%20Pessoais/src/ine5612Lab1/modelo/Categoria.java</file>
+            <file>file:/Users/daniel/Documents/gitHub/INE5612/Controle%20de%20Atividades%20Pessoais/src/ine5612Lab1/modelo/Atividade.java</file>
+            <file>file:/Users/daniel/Documents/gitHub/INE5612/Controle%20de%20Atividades%20Pessoais/src/ine5612Lab1/beans/CategoriaBean.java</file>
         </group>
     </open-files>
 </project-private>

@@ -7,8 +7,8 @@
 package visao;
 
 
-import visao.paineis.PainelEditarAtividades;
-import visao.paineis.PainelEditarCategorias;
+import visao.paineis.PainelAdicionarAtividades;
+import visao.paineis.PainelAdicionarEditarCategorias;
 /**
  *
  * @author aluno
@@ -143,13 +143,13 @@ public class INE5612Lab1 extends javax.swing.JFrame {
 
     private void novaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novaCategoriaActionPerformed
         this.getContentPane().removeAll();
-        this.getContentPane().add(new PainelEditarCategorias());
+        this.getContentPane().add(new PainelAdicionarEditarCategorias());
         this.pack();
     }//GEN-LAST:event_novaCategoriaActionPerformed
 
     private void novaAtividadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novaAtividadeActionPerformed
         this.getContentPane().removeAll();
-        this.getContentPane().add(new PainelEditarAtividades());
+        this.getContentPane().add(new PainelAdicionarAtividades());
         this.pack();
     }//GEN-LAST:event_novaAtividadeActionPerformed
 

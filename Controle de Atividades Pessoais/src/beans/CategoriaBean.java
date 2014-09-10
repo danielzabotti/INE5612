@@ -12,10 +12,20 @@ import java.io.Serializable;
  *
  * @author daniel
  */
-class CategoriaBean implements Serializable{
+public class CategoriaBean implements Serializable{
     private String nome;
     private String descricao;
 
+    public CategoriaBean(CategoriaBean categoria){
+        this.nome = categoria.nome;
+        this.descricao = categoria.descricao;
+    }
+    
+    public CategoriaBean(String nome, String descricao){
+        this.nome = nome;
+        this.descricao = descricao;
+    }
+    
     public String getNome() {
         return nome;
     }
