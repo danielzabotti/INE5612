@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package ine5612lab1.paineis;
+package visao.paineis;
 
 /**
  *

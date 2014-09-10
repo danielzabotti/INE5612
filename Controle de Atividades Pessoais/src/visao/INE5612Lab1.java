@@ -4,10 +4,11 @@
  * and open the template in the editor.
  */
 
-package ine5612lab1;
+package visao;
 
 
-import ine5612lab1.paineis.*;
+import visao.paineis.PainelEditarAtividades;
+import visao.paineis.PainelEditarCategorias;
 /**
  *
  * @author aluno
@@ -52,9 +53,19 @@ public class INE5612Lab1 extends javax.swing.JFrame {
 
         novaCategoria.setText("Categoria");
         novaCategoria.setToolTipText("");
+        novaCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                novaCategoriaActionPerformed(evt);
+            }
+        });
         jMenu3.add(novaCategoria);
 
         novaAtividade.setText("Atividade");
+        novaAtividade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                novaAtividadeActionPerformed(evt);
+            }
+        });
         jMenu3.add(novaAtividade);
 
         jMenu1.add(jMenu3);
@@ -119,9 +130,7 @@ public class INE5612Lab1 extends javax.swing.JFrame {
     }//GEN-LAST:event_editarCategoriaMouseClicked
 
     private void editarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarCategoriaActionPerformed
-        this.getContentPane().removeAll();
-        this.getContentPane().add(new PainelEditarCategorias());
-        this.pack();
+
     }//GEN-LAST:event_editarCategoriaActionPerformed
 
     private void editarCategoriaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_editarCategoriaAncestorAdded
@@ -129,10 +138,20 @@ public class INE5612Lab1 extends javax.swing.JFrame {
     }//GEN-LAST:event_editarCategoriaAncestorAdded
 
     private void editarAtividadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarAtividadeActionPerformed
+
+    }//GEN-LAST:event_editarAtividadeActionPerformed
+
+    private void novaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novaCategoriaActionPerformed
+        this.getContentPane().removeAll();
+        this.getContentPane().add(new PainelEditarCategorias());
+        this.pack();
+    }//GEN-LAST:event_novaCategoriaActionPerformed
+
+    private void novaAtividadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novaAtividadeActionPerformed
         this.getContentPane().removeAll();
         this.getContentPane().add(new PainelEditarAtividades());
-        this.pack();     // TODO add your handling code here:
-    }//GEN-LAST:event_editarAtividadeActionPerformed
+        this.pack();
+    }//GEN-LAST:event_novaAtividadeActionPerformed
 
     /**
      * @param args the command line arguments
