@@ -31,6 +31,6 @@ public class ListaDeCategoria {
     public void editaCategoria(String descricao, CategoriaBean categoria){
         CategoriaBean modificada = new CategoriaBean(categoria);
         modificada.setDescricao(descricao);
-        listaDeCategoria.replace(categoria.getNome(), categoria, modificada);
+        listaDeCategoria.replace(categoria.getNome(), modificada);
     }
 }
