@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package visao.paineis;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -156,7 +158,10 @@ public class PainelAdicionarAtividades extends javax.swing.JPanel {
     }//GEN-LAST:event_nomeAtividadeActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        topFrame.removeAll();
+        topFrame.add(new PainelInicial());
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
