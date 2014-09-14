@@ -7,6 +7,9 @@
 package visao;
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JPanel;
 import visao.paineis.PainelAdicionarAtividades;
 import visao.paineis.PainelAdicionarEditarCategorias;
 /**
@@ -212,7 +215,17 @@ public class INE5612Lab1 extends javax.swing.JFrame {
         this.getContentPane().add(new PainelAdicionarAtividades());
         this.pack();
     }//GEN-LAST:event_novaAtividadeActionPerformed
-
+    
+    public void trocaPainel(Class c){
+        
+        this.getContentPane().removeAll();
+        try {
+            this.getContentPane().add((JPanel) c.newInstance());
+        } catch (InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(INE5612Lab1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.pack();
+    }
     /**
      * @param args the command line arguments
      */
