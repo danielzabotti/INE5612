@@ -3,14 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package visao.paineis;
+
+import beans.CategoriaBean;
+import controle.GerenciadorDeAtividades;
+import javax.swing.SwingUtilities;
+import visao.INE5612Lab1;
 
 /**
  *
  * @author daniel
  */
 public class PainelAdicionarEditarCategorias extends javax.swing.JPanel {
+
+    GerenciadorDeAtividades gerenciador = GerenciadorDeAtividades.getInstance();
+    private Boolean isEdicao = false;
 
     /**
      * Creates new form PainelEditarCategorias
@@ -33,8 +40,8 @@ public class PainelAdicionarEditarCategorias extends javax.swing.JPanel {
         descricaoCategoria = new javax.swing.JTextArea();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonConfirmar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
 
         nomeCategoria.setText("Nome da Categoria");
         nomeCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -52,15 +59,19 @@ public class PainelAdicionarEditarCategorias extends javax.swing.JPanel {
 
         jLabel12.setText("Descrição");
 
-        jButton1.setText("Confirmar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonConfirmarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
-        jButton2.setActionCommand("Cancelar");
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -78,9 +89,9 @@ public class PainelAdicionarEditarCategorias extends javax.swing.JPanel {
                         .addGap(0, 326, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(jButtonConfirmar)
                         .addGap(7, 7, 7)
-                        .addComponent(jButton2)))
+                        .addComponent(jButtonCancelar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -96,8 +107,8 @@ public class PainelAdicionarEditarCategorias extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonConfirmar)
+                    .addComponent(jButtonCancelar))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -106,15 +117,34 @@ public class PainelAdicionarEditarCategorias extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeCategoriaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    public void carregarCategoria(CategoriaBean categoria){
+        this.nomeCategoria.setText(categoria.getNome());
+        this.nomeCategoria.setEditable(false);
+        this.descricaoCategoria.setText(categoria.getDescricao());
+        this.isEdicao = true;
+    }
+    
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        INE5612Lab1 topFrame = (INE5612Lab1) SwingUtilities.getWindowAncestor(this);
+        CategoriaBean categoria = new CategoriaBean(nomeCategoria.getText(), descricaoCategoria.getText());
+        if(isEdicao){
+        gerenciador.editarCategoria(categoria);
+        }else{
+        gerenciador.adicionarCategoria(categoria);
+        }
+        topFrame.trocaPainel(new PainelInicial());
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        INE5612Lab1 topFrame = (INE5612Lab1) SwingUtilities.getWindowAncestor(this);
+        topFrame.trocaPainel(new PainelInicial());
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea descricaoCategoria;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JScrollPane jScrollPane2;

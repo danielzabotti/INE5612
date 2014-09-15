@@ -34,7 +34,7 @@ public class AtividadeBean implements Serializable {
             Integer progresso, Date inicio, Date fim) {
         this.nome = nome;
         this.descricao = descricao;
-        this.categoria = categoria;
+        this.categoria = new CategoriaBean(categoria);
         this.progresso = progresso;
         this.inicio = inicio;
         this.fim = fim;

@@ -3,8 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package visao.paineis;
+
+import controle.GerenciadorDeAtividades;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import javax.swing.AbstractListModel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
+import visao.INE5612Lab1;
 
 /**
  *
@@ -12,11 +20,50 @@ package visao.paineis;
  */
 public class PainelInicial extends javax.swing.JPanel {
 
+    GerenciadorDeAtividades gerenciador = GerenciadorDeAtividades.getInstance();
+    JPopupMenu menuDeContexto;
+    JMenuItem jMenuItemRemover;
+    JMenuItem jMenuItemEditar;
+
     /**
      * Creates new form PainelInicial
      */
     public PainelInicial() {
         initComponents();
+
+        this.menuDeContexto = new JPopupMenu();
+        menuDeContexto = new JPopupMenu();
+        this.jMenuItemEditar = new JMenuItem("Editar");
+        this.jMenuItemRemover = new JMenuItem("Remover");
+
+        menuDeContexto.add(jMenuItemEditar);
+        menuDeContexto.add(jMenuItemRemover);
+
+        this.jListListaDeCategoria.setModel(new AbstractListModel() {
+            GerenciadorDeAtividades gerenciador = GerenciadorDeAtividades.getInstance();
+            ArrayList<String> chaves = new ArrayList(gerenciador.listarCategorias().keySet());
+
+            public int getSize() {
+                return chaves.size();
+            }
+
+            public String getElementAt(int index) {
+                return chaves.get(index);
+            }
+        });
+
+        this.jListListaDeAtividade.setModel(new AbstractListModel() {
+            GerenciadorDeAtividades gerenciador = GerenciadorDeAtividades.getInstance();
+            ArrayList<String> chaves = new ArrayList(gerenciador.listarAtividades().keySet());
+
+            public int getSize() {
+                return chaves.size();
+            }
+
+            public String getElementAt(int index) {
+                return chaves.get(index);
+            }
+        });
     }
 
     /**
@@ -32,10 +79,11 @@ public class PainelInicial extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jListListaDeAtividade = new javax.swing.JList();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
+        jListListaDeCategoria = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
+        jButtonEditarCategoria = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -43,78 +91,156 @@ public class PainelInicial extends javax.swing.JPanel {
 
         jLabel2.setText("Filtro:");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        jListListaDeAtividade.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jListListaDeAtividade.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListListaDeAtividadeMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jListListaDeAtividade);
 
-        jList2.setModel(new javax.swing.AbstractListModel() {
+        jListListaDeCategoria.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jList2);
+        jListListaDeCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListListaDeCategoriaMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jListListaDeCategoria);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Categorias");
 
+        jButtonEditarCategoria.setText("Editar Categoria");
+        jButtonEditarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarCategoriaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonEditarCategoria)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jScrollPane2))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(56, 56, 56)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                            .addComponent(jLabel3)
-                            .addGap(65, 65, 65)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
+                .addComponent(jButtonEditarCategoria)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGap(71, 71, 71)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, Short.MAX_VALUE)))
                     .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonEditarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarCategoriaActionPerformed
+        INE5612Lab1 topFrame = (INE5612Lab1) SwingUtilities.getWindowAncestor(this);
+        PainelAdicionarEditarCategorias painel = new PainelAdicionarEditarCategorias();
+        painel.carregarCategoria(gerenciador.listarCategorias().get(this.jListListaDeCategoria.getSelectedValue()));
+        topFrame.trocaPainel(painel);
+    }//GEN-LAST:event_jButtonEditarCategoriaActionPerformed
+
+    private void jListListaDeCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListListaDeCategoriaMouseClicked
+        if (SwingUtilities.isRightMouseButton(evt)
+                && !jListListaDeCategoria.isSelectionEmpty()
+                && jListListaDeCategoria.locationToIndex(evt.getPoint())
+                == jListListaDeCategoria.getSelectedIndex()) {
+            menuDeContexto.getComponent(menuDeContexto.getComponentIndex(this.jMenuItemEditar)).setVisible(true);
+            menuDeContexto.getComponent(menuDeContexto.getComponentIndex(this.jMenuItemRemover)).setVisible(true);
+            menuDeContexto.show(jListListaDeCategoria, evt.getX(), evt.getY());
+
+            jMenuItemEditar.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButtonEditarCategoriaActionPerformed(evt);
+                }
+            });
+
+            jMenuItemRemover.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jRemoverCategoriaActionPerformed();
+                }
+            });
+        }
+    }//GEN-LAST:event_jListListaDeCategoriaMouseClicked
+
+    private void jListListaDeAtividadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListListaDeAtividadeMouseClicked
+        if (SwingUtilities.isRightMouseButton(evt)
+                && !jListListaDeAtividade.isSelectionEmpty()
+                && jListListaDeAtividade.locationToIndex(evt.getPoint())
+                == jListListaDeAtividade.getSelectedIndex()) {
+            menuDeContexto.getComponent(menuDeContexto.getComponentIndex(this.jMenuItemEditar)).setVisible(false);
+            menuDeContexto.getComponent(menuDeContexto.getComponentIndex(this.jMenuItemRemover)).setVisible(true);
+            menuDeContexto.show(jListListaDeAtividade, evt.getX(), evt.getY());
+            
+            jMenuItemRemover.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jRemoverAtividadeActionPerformed();
+                }
+            });
+        }
+    }//GEN-LAST:event_jListListaDeAtividadeMouseClicked
+
+    private void jRemoverCategoriaActionPerformed() {
+        gerenciador.removerCategoria((String) jListListaDeCategoria.getSelectedValue());        
+    }
+
+    private void jRemoverAtividadeActionPerformed() {
+        gerenciador.removerAtividade((String) jListListaDeAtividade.getSelectedValue());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonEditarCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList jList1;
-    private javax.swing.JList jList2;
+    private javax.swing.JList jListListaDeAtividade;
+    private javax.swing.JList jListListaDeCategoria;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
