@@ -227,11 +227,17 @@ public class PainelInicial extends javax.swing.JPanel {
     }//GEN-LAST:event_jListListaDeAtividadeMouseClicked
 
     private void jRemoverCategoriaActionPerformed() {
-        gerenciador.removerCategoria((String) jListListaDeCategoria.getSelectedValue());        
+        gerenciador.removerCategoria((String) jListListaDeCategoria.getSelectedValue());
+        INE5612Lab1 topFrame = (INE5612Lab1) SwingUtilities.getWindowAncestor(this);
+        PainelInicial painel = new PainelInicial();
+        topFrame.trocaPainel(painel);
     }
 
     private void jRemoverAtividadeActionPerformed() {
         gerenciador.removerAtividade((String) jListListaDeAtividade.getSelectedValue());
+        INE5612Lab1 topFrame = (INE5612Lab1) SwingUtilities.getWindowAncestor(this);
+        PainelInicial painel = new PainelInicial();
+        topFrame.trocaPainel(painel);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
