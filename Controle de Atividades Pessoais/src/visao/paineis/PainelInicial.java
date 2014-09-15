@@ -6,7 +6,6 @@
 package visao.paineis;
 
 import controle.GerenciadorDeAtividades;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.AbstractListModel;
 import javax.swing.JMenuItem;
@@ -83,7 +82,6 @@ public class PainelInicial extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jListListaDeCategoria = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
-        jButtonEditarCategoria = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -119,13 +117,6 @@ public class PainelInicial extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Categorias");
 
-        jButtonEditarCategoria.setText("Editar Categoria");
-        jButtonEditarCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarCategoriaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -139,11 +130,7 @@ public class PainelInicial extends javax.swing.JPanel {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonEditarCategoria)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -164,27 +151,16 @@ public class PainelInicial extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
-                .addComponent(jButtonEditarCategoria)
-                .addContainerGap())
+                .addContainerGap(248, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(71, 71, 71)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2))
                     .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonEditarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarCategoriaActionPerformed
-        INE5612Lab1 topFrame = (INE5612Lab1) SwingUtilities.getWindowAncestor(this);
-        PainelAdicionarEditarCategorias painel = new PainelAdicionarEditarCategorias();
-        painel.carregarCategoria(gerenciador.listarCategorias().get(this.jListListaDeCategoria.getSelectedValue()));
-        topFrame.trocaPainel(painel);
-    }//GEN-LAST:event_jButtonEditarCategoriaActionPerformed
 
     private void jListListaDeCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListListaDeCategoriaMouseClicked
         if (SwingUtilities.isRightMouseButton(evt)
@@ -197,13 +173,13 @@ public class PainelInicial extends javax.swing.JPanel {
 
             jMenuItemEditar.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButtonEditarCategoriaActionPerformed(evt);
+                    jMenuItemEditarActionPerformed(evt);
                 }
             });
 
             jMenuItemRemover.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jRemoverCategoriaActionPerformed();
+                    jMenuItemRemoverCategoriaActionPerformed();
                 }
             });
         }
@@ -220,20 +196,27 @@ public class PainelInicial extends javax.swing.JPanel {
             
             jMenuItemRemover.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jRemoverAtividadeActionPerformed();
+                    jMenuItemRemoverAtividadeActionPerformed();
                 }
             });
         }
     }//GEN-LAST:event_jListListaDeAtividadeMouseClicked
 
-    private void jRemoverCategoriaActionPerformed() {
+    private void jMenuItemEditarActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+        INE5612Lab1 topFrame = (INE5612Lab1) SwingUtilities.getWindowAncestor(this);
+        PainelAdicionarEditarCategorias painel = new PainelAdicionarEditarCategorias();
+        painel.carregarCategoria(gerenciador.listarCategorias().get(this.jListListaDeCategoria.getSelectedValue()));
+        topFrame.trocaPainel(painel);
+    }     
+    
+    private void jMenuItemRemoverCategoriaActionPerformed() {
         gerenciador.removerCategoria((String) jListListaDeCategoria.getSelectedValue());
         INE5612Lab1 topFrame = (INE5612Lab1) SwingUtilities.getWindowAncestor(this);
         PainelInicial painel = new PainelInicial();
         topFrame.trocaPainel(painel);
     }
 
-    private void jRemoverAtividadeActionPerformed() {
+    private void jMenuItemRemoverAtividadeActionPerformed() {
         gerenciador.removerAtividade((String) jListListaDeAtividade.getSelectedValue());
         INE5612Lab1 topFrame = (INE5612Lab1) SwingUtilities.getWindowAncestor(this);
         PainelInicial painel = new PainelInicial();
@@ -241,7 +224,6 @@ public class PainelInicial extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonEditarCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
